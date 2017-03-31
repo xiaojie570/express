@@ -1,0 +1,16 @@
+extends layout
+
+block content
+    h1 更新用户资料
+    form(method='post', action='/users/login')
+        div.form-row
+            label
+                span ID:
+                input(type='text',name='id')
+        div.form-row
+            label
+                span name:
+                input(type='text',name='password')
+
+        div.form-row
+            input(type='submit')
