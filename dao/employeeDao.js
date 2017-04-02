@@ -5,7 +5,6 @@ var mysql = require('mysql');
 var $conf = require('../conf/db');
 var $util = require('../util/util');
 var $sql = require('../SqlMapping/employeeSqlMapping');
-var id = require('node-uuid');
 var CryptoJS = require('crypto-js');
 var crypto = require('crypto');
 
