@@ -10,3 +10,9 @@
     ID查询 http://localhost:3000/p/users/query?id=1
 
     修改 http://localhost:3000/p/users，会返回一个页面。通过表单模拟一个post请求
+
+
+
+
+写成markdown 形式：apidoc -i Login/ -o doc/
+地址：https://www.npmjs.com/package/apidoc

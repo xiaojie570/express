@@ -7,12 +7,13 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var employee = require('./routes/employee');
+//var node_dev = require('node-dev');
 
 var app = express();
 
 //session
 var session = require('express-session');
-var cookieParser = require('cookie-parser');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -50,30 +51,41 @@ app.use(session({
     cookie: {maxAge: 8000000000 },
 }));
 
-
-
-
 app.use(function (req,res,next){
     console.log("sesion++++++++++++++++++++++++++");
     console.log(req.session.user);
-   if(!req.session.user){
-        if(req.url=='/users/login'){
-          next();//如果请求的地址是登陆通过，进行下一个请求
-        }else{
-          res.redirect('/users/login');
+    console.log("------------------------" + !req.session.user);
+    console.log(req.body.username);
+    if(req.body.username==null) {
+        console.log(req.url == '/users/registerUser/');
+
+        if (req.url == '/users/login') {
+            console.log(req.url == '/users/login');
+            res.render("updateUser");//如果请求的地址是登陆通过，进行下一个请求
+        } else if (req.url == '/users/registerUser'||req.url == '/users/register_judgeUsername') {
+            if (req.body.username != null) {
+                console.log(req.url == '/users/registerUser');
+            } else {
+                res.render("register");
+            }
+        } else if (!req.session.user) {
+            res.redirect('/users/login');
+        } else {
+            next();
         }
-   }else {
-     next();
-   }
+    }else {
+        console.log("++++++++++++++++++++++++++++++++++++++1111111111111111111");
+        console.log(req.session.user);
+        next();
+    }
 });
 //session 处理
 
 
 
-app.use('/', routes);
+app.use('/index', routes);
 app.use('/users', users); // 自定义路径
-
-
+app.use('/employee', employee);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

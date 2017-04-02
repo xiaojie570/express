@@ -13,12 +13,12 @@ var user = {
 
 module.exports = user;*/
 var user = {
-    insert:'INSERT INTO user(id, username,password) VALUES(?,?,?)',
+    insert:'INSERT INTO user(id, username,password) VALUES(0,?,?)',
     update:'update user set upassword=? where uid=?',
-    delete: 'delete from user where uid=?',
+    delete: 'delete from user where username=?',
     queryById: 'select * from user where username=?',
     queryAll: 'select * from user',
-    query_correct: 'select * from user where id=? and password=?'
+    query_correct: 'select * from user where username=? and password=?'
 
 };
 

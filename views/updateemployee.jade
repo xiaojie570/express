@@ -1,0 +1,21 @@
+extends layout
+
+block content
+    h1 更新员工资料
+    form(method='post', action='/employee/updateInfo_Staff')
+        div.form-row
+            label
+                span 员工姓名:
+                input(type='text',name='employee_name')
+        div.form-row
+            labe2
+                span 员工电话:
+                input(type='text',name='telephone')
+
+        div.form-row
+            labe3
+                span 员工住址:
+                input(type='text',name='location')
+
+        div.form-row
+            input(type='submit')
