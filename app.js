@@ -66,7 +66,8 @@ app.use(function (req,res,next){
             if (req.body.username != null) {
                 console.log(req.url == '/users/registerUser');
             } else {
-                res.render("register");
+                res.redirect('/users/registerUser');
+                //res.render("register");
             }
         } else if (!req.session.user) {
             res.redirect('/users/login');
@@ -74,9 +75,11 @@ app.use(function (req,res,next){
             next();
         }
     }else {
-        console.log("++++++++++++++++++++++++++++++++++++++1111111111111111111");
-        console.log(req.session.user);
-        next();
+        if(req.url == '/users/register_judgeUsername')
+        {
+            next();
+        }
+
     }
 });
 //session 处理

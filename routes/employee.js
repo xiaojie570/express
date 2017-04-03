@@ -13,8 +13,11 @@ router.post('/updateInfo_Staff',function (req,res,next) {
 
 });
 
+/*
 router.get('/updateInfo_Staff',function (req,res,next) {
     res.render('updateemployee');
 });
+*/
+
 
 module.exports = router;

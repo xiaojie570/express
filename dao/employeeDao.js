@@ -37,8 +37,9 @@ module.exports = {
             var employee_name = req.body.employee_name;
             var telephone = req.body.telephone;
             var location = req.body.location;
+            var position = req.body.position;
 
-            connection.query($sql.updateByStaffid,[employee_name,telephone,location,req.session.user.username],function (err,result) {
+            connection.query($sql.updateByStaffid,[employee_name,telephone,location,position,req.session.user.username],function (err,result) {
                 console.log("updateByStaffid2222222222++++++++++++++++++++++++++++++++++++");
                 console.log(employee_name);
                 console.log(telephone);
@@ -50,9 +51,17 @@ module.exports = {
         });
     },
 
-    findByStaff:function (req,res,next) {
+    findByStaffid:function (req,res,next,findOne) {
         pool.getConnection(function (err,connection) {
-            connection.query($sql.findByStaffid)
-        })
+            connection.query($sql.findByStaffid,req.body.staffid,function (err,result) {
+                var a;
+                if(!result){ //如果没有记录
+                    a = false;
+                }else{
+                    a = true;
+                }
+                findOne(a);
+            });
+        });
     }
 };
