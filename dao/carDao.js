@@ -24,9 +24,9 @@ var jsonWrite = function (res,ret) {
 module.exports = {
     addCar: function (req,res,next) {
         pool.getConnection(function (err,connection) {
-            connection.query($sql.addCar,[req.body.license_plate,req.body.staffid],function (err,result) {
+            connection.query($sql.addCar,[req.body.license_plate,req.body.username],function (err,result) {
                 res.json({"status":"0"}); //增加成功
-                connection.release();
+                connection .release();
             });
         });
     }

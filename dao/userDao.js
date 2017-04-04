@@ -144,6 +144,9 @@ module.exports = {
             connection.query($sql.queryById, username, function(err, result) {
                 var a = result;
                 console.log(a);
+                console.log("++++++++++++++");
+                console.log(result.length === 0);
+                console.log("++++++++++++++");
                 connection.release();
                 if(result.length === 0 ){//为真的时候有值，不可以继续插入 result==true时，说明有值，不可以插入；result==false时，没有 可以插入
                     var status = {"status":0}; //可以插入

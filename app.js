@@ -54,21 +54,22 @@ app.use(session({
 app.use(function (req,res,next){
     console.log("sesion++++++++++++++++++++++++++");
     console.log(req.session.user);
-    console.log("------------------------" + !req.session.user);
+    console.log("------------------------" + (req.url == '/users/login'));
     console.log(req.body.username);
-    if(req.body.username==null) {
+
+    if((req.body.username==null)||(req.url == '/users/registerUser')||(req.url == '/users/login')) {
         console.log(req.url == '/users/registerUser/');
 
         if (req.url == '/users/login') {
-            console.log(req.url == '/users/login');
-            res.render("updateUser");//如果请求的地址是登陆通过，进行下一个请求
-        } else if (req.url == '/users/registerUser'||req.url == '/users/register_judgeUsername') {
-            if (req.body.username != null) {
+            console.log((req.url == '/users/login') +'++++++++++++++++login');
+            next();//如果请求的地址是登陆通过，进行下一个请求
+        } else if (req.url == '/users/registerUser') {
+            /*if (req.body.username != null) {
                 console.log(req.url == '/users/registerUser');
-            } else {
-                res.redirect('/users/registerUser');
-                //res.render("register");
-            }
+            } else {*/
+                next();
+                //res.redirect('/users/registerUser');
+
         } else if (!req.session.user) {
             res.redirect('/users/login');
         } else {
@@ -77,9 +78,13 @@ app.use(function (req,res,next){
     }else {
         if(req.url == '/users/register_judgeUsername')
         {
+            console.log("+++++++++++++++");
+            console.log(req.url == '/users/register_judgeUsername');
             next();
         }
-
+        else{
+            next();
+        }
     }
 });
 //session 处理
@@ -89,6 +94,27 @@ app.use(function (req,res,next){
 app.use('/index', routes);
 app.use('/users', users); // 自定义路径
 app.use('/employee', employee);
+
+
+//设置跨域访问------------------------------
+app.all('*', function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
+    res.header("X-Powered-By",' 3.2.1')
+    res.header("Content-Type", "application/json;charset=utf-8");
+    next();
+});
+
+app.get('/auth/:id/:password', function(req, res) {
+    res.send({id:req.params.id, name: req.params.password});
+});
+
+//app.listen(3000);
+console.log('Listening on port 3000...');
+//设置跨域访问------------------------------
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
