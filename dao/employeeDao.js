@@ -110,11 +110,13 @@ module.exports = {
     judgePositionAndEmployee : function (req,res,next,carAdd) {
         pool.getConnection(function (err,connection) {
             var employee_name = req.body.employee_name;
-            var position = req.body.employee_name;
-            connection.query($sql.judgePositionAndEmployee,[employee_name,position],function (err,result) {
+            var position = req.body.position;
+            console.log(employee_name);
+            console.log(position);
+            connection.query($sql.judgePositionAndEmployee,[position,employee_name],function (err,result) {
                var isExist;
                console.log(result+"判断职称和名字是否匹配judgePositionAndEmployee");
-               console.log(result);
+               console.log(result.length===0);
                console.log(!result);
                if(result.length===0){
                    console.log(result+"-----------------判断职称和名字是否匹配judgePositionAndEmployee");

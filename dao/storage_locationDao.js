@@ -4,7 +4,7 @@
 var mysql = require('mysql');
 var $conf = require('../conf/db');
 var $util = require('../util/util');
-var $sql = require('../SqlMapping/userSqlMapping');
+var $sql = require('../SqlMapping/storage_locationSqlMapping');
 var CryptoJS = require('crypto-js');
 var crypto = require('crypto');
 

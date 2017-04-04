@@ -224,7 +224,6 @@ module.exports = {
                 }
             });
         });
-
     },
     queryAll: function (req, res, next) {
         pool.getConnection(function(err, connection) {

@@ -31,14 +31,40 @@ module.exports = {
             connection.query($sql.addCar,[license_plate,position,employee_name],function(err,result) {
                 console.log(result+"+++++++++++++addCar++++++++++++++");
                 if(result) {
-
                     res.json({"status": "0"}); //增加成功
                 }else{
                     res.json({"status": "1"});//增加失败
                 }
                 connection .release();
+            });
+        });
+    },
 
+    querryAllCar:function (req,res,next) {
+        pool.getConnection(function (err,connection) {
+            connection.query($sql.querryAllCar,function (err,result) {
+                if(result.length === 0){
+                    var status = {"status":1};
+                }else{
+                    res.json(result);
+                }
+                res.json(status);
+            });
+        });
+    },
+    //不可以重复添加（车牌号和司机）
+    judegEmployee_nameAndlicense_plate:function (req,res,next,judegExist) {
+        pool.getConnection(function (err,connection) {
+            connection.query($sql.judegEmployee_nameAndlicense_plate,[req.body.employee_name,req.body.license_plate],function (err,result) {
+                var isExist;
+                if(result.length === 0){  // 可以继续添加
+                    isExist = false;
+                }else{              //不可以添加
+                    isExist = true;
+                }
+                judegExist(isExist);
             });
         });
     }
+
 };
