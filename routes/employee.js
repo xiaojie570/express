@@ -13,17 +13,18 @@ var employeeDao =require('../dao/employeeDao');
             res.json({"status":"1"});//position不存在
         }
     }
-
     employeeDao.selectPosition(req,res,next);
 });*/
 
-//点击提交的时候要先判断职位是否存在
+
+//点击更新提交的时候（所有更新信息）要先判断职位是否存在
 router.post('/updateStaffposition',function (req,res,next) {
      function updateInfo(isExists,employeeDao) {
-         if(isExists){
-                employeeDao.updateByusername(req,res,next);
-         }else{
-                res.json({"status":"1"});//position不存在
+         console.log("jjjjjjssssssupdateStaffposition+++++++++++++++++++++++++++");
+         if(isExists){ //存在,存在可以插入
+             employeeDao.updateByusername(req,res,next);
+         }else{//不存在，不可以插入
+             res.json({"status":"1"});//position不存在
          }
     }
     employeeDao.selectPosition(req,res,next,updateInfo);
@@ -38,6 +39,12 @@ router.post('/updateByusername',function (req,res,next) {
 router.post('/selectEmployeePosition',function(req,res,next){
     employeeDao.selectEmployeePosition(req,res,next);
 });
+
+//按照职位找出员工
+router.post('/selectEmployee_nameByPosition',function (req,res,next) {
+    employeeDao.selectEmployee_nameByPosition(req,res,next);
+});
+
 
 /*
 router.get('/updateInfo_Staff',function (req,res,next) {

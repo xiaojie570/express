@@ -69,7 +69,7 @@ module.exports = {
     delete: function (req, res, next) {
         // delete by Id
         pool.getConnection(function(err, connection) {
-            var uid = +req.query.uid;
+            var uid = req.query.uid;
             connection.query($sql.delete, uid, function(err, result) {
                 if(result.affectedRows > 0) {
                     result = {
@@ -110,7 +110,7 @@ module.exports = {
         });
     },
     queryById: function (req, res, next, nextMyself) {
-        var username = +req.body.username; // 为了拼凑正确的sql语句，这里要转下整数
+        var username = req.body.username; // 为了拼凑正确的sql语句，这里要转下整数
         let self = this;
         console.log("=============queryBYId111===========");
         pool.getConnection(function(err, connection) {
@@ -120,14 +120,15 @@ module.exports = {
                 var a = result;
                 console.log(a);
                 console.log(result);
+                console.log(result.length);
                 console.log("=============queryBYId33333333===========");
                 /*console.log(a[0]["username"]);
                  console.log(a[0]["password"]);*/
                 connection.release();
                 console.log("------------------------------dao" );
-                console.log(result);
+                //console.log(result.length === 0);
                 //.length === 0
-                if(result.length === 0 ){//为真的时候有值，不可以继续插入 result==true时，说明有值，不可以插入；result==false时，没有 可以插入
+                if(result.length === 0){//为真的时候有值，不可以继续插入 result==true时，说明有值，不可以插入；result==false时，没有 可以插入
                     a=true;
                 }
                 else{
@@ -139,7 +140,7 @@ module.exports = {
     },
 
     register_judgeUsername: function (req, res, next) {
-        var username = +req.body.username; // 为了拼凑正确的sql语句，这里要转下整数
+        var username = req.body.username; // 为了拼凑正确的sql语句，这里要转下整数
         pool.getConnection(function(err, connection) {
             connection.query($sql.queryById, username, function(err, result) {
                 var a = result;
@@ -148,6 +149,8 @@ module.exports = {
                 console.log(result.length === 0);
                 console.log("++++++++++++++");
                 connection.release();
+
+
                 if(result.length === 0 ){//为真的时候有值，不可以继续插入 result==true时，说明有值，不可以插入；result==false时，没有 可以插入
                     var status = {"status":0}; //可以插入
                 }
@@ -161,7 +164,7 @@ module.exports = {
 
     //判断用户名和密码其中是否一个有问题
     login_correct: function (req,res,next,matchUsername) {
-        var username = +req.body.username; // 为了拼凑正确的sql语句，这里要转下整数
+        var username = req.body.username; // 为了拼凑正确的sql语句，这里要转下整数
         var password = req.body.password;
 
         console.log("============================================="+password);
@@ -189,7 +192,7 @@ module.exports = {
         });
     },
     queryOne: function (req, res, next) {
-        var username = +req.query.username; // 为了拼凑正确的sql语句，这里要转下整数
+        var username = req.query.username; // 为了拼凑正确的sql语句，这里要转下整数
         console.log("queryOne----------------------------" + username);
         pool.getConnection(function(err, connection) {
             connection.query($sql.queryById, username, function(err, result) {
@@ -202,7 +205,7 @@ module.exports = {
     },
 
     queryName_Pass: function (req, res, next, matchLogin) {
-        var username = +req.body.username; // 为了拼凑正确的sql语句，这里要转下整数
+        var username = req.body.username; // 为了拼凑正确的sql语句，这里要转下整数
         var password = req.body.password;
         var self = this;
         console.log("queryOne用户名----------------------------" + username);

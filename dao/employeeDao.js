@@ -36,8 +36,10 @@ module.exports = {
             var employee_name = req.body.employee_name;
             var telephone = req.body.telephone;
             var location = req.body.location;
+            var position = req.body.position;
             var username = req.session.user.username;
-            connection.query($sql.updateByStaffid,[employee_name,telephone,location,username],function (err,result) {
+            connection.query($sql.updateByusername,[employee_name,telephone,location,position,username],function (err,result) {
+                console.log(position+"------------------updateByusername------------");
                 if(result!=null){     // 更新成功
                     var status = {"status":0};
                 }else{              //更新不成功
@@ -67,6 +69,7 @@ module.exports = {
         pool.getConnection(function (err,connection) {
             connection.query($sql.selectEmployeePosition,function (err,result) {
                 console.log(result);
+                console.log("+++++++++++++++++++++++++selectEmployeePosition++++++++++++++++")
                 let resultArr = result.map(item => {
                     return item.position;
                 });
@@ -76,12 +79,24 @@ module.exports = {
         });
         
     },
+    //按照职位找出对应的员工
+    selectEmployee_nameByPosition: function (req,res,next) {
+        pool.getConnection(function (err,connection) {
+            connection.query($sql.selectEmployee_nameByPosition,req.body.position,function (err,result) {
+                let resultArr = result.map(item =>{
+                    return item.employee_name;
+                });
+                jsonWrite(res,resultArr);
+            })
+        })
+    },
 
     selectPosition : function (req,res,next,updateInfo) {
         var mySelf = this;
         pool.getConnection(function(err,connection){
             connection.query($sql.selectPosition,req.body.position,function (err,result) {
                 var isExist;
+                console.log("=------------------------------------"+(result.length===0)+"=-------------------------------------------=====================selectPosition");
                 if(!result){ //如果result为假，说明不存在
                     isExist = false;
                }else{
@@ -90,6 +105,28 @@ module.exports = {
                 updateInfo(isExist,mySelf);
             });
         });
+    },
+
+    judgePositionAndEmployee : function (req,res,next,carAdd) {
+        pool.getConnection(function (err,connection) {
+            var employee_name = req.body.employee_name;
+            var position = req.body.employee_name;
+            connection.query($sql.judgePositionAndEmployee,[employee_name,position],function (err,result) {
+               var isExist;
+               console.log(result+"判断职称和名字是否匹配judgePositionAndEmployee");
+               console.log(result);
+               console.log(!result);
+               if(result.length===0){
+                   console.log(result+"-----------------判断职称和名字是否匹配judgePositionAndEmployee");
+                   isExist = false;
+               }else{
+                   console.log(result+"9++++++++++++++++++++++判断职称和名字是否匹配judgePositionAndEmployee");
+                   isExist = true;
+               }
+               carAdd(isExist);
+            });
+        });
     }
 
 };
+

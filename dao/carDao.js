@@ -7,8 +7,8 @@ var $util = require('../util/util');
 var $sql = require('../SqlMapping/carSqlMapping');
 var CryptoJS = require('crypto-js');
 var crypto = require('crypto');
-
-var pool  =  mysql.createConnection($util.extend({},$conf.mysql));
+// 使用连接池，提升性能
+var pool  = mysql.createPool($util.extend({}, $conf.mysql));
 
 var jsonWrite = function (res,ret) {
     if(typeof  ret === 'undefined') {
@@ -22,11 +22,22 @@ var jsonWrite = function (res,ret) {
 };
 
 module.exports = {
+    //增加车辆
     addCar: function (req,res,next) {
         pool.getConnection(function (err,connection) {
-            connection.query($sql.addCar,[req.body.license_plate,req.body.username],function (err,result) {
-                res.json({"status":"0"}); //增加成功
+            var license_plate = req.body.license_plate;
+            var position = req.body.position;
+            var employee_name = req.body.employee_name;
+            connection.query($sql.addCar,[license_plate,position,employee_name],function(err,result) {
+                console.log(result+"+++++++++++++addCar++++++++++++++");
+                if(result) {
+
+                    res.json({"status": "0"}); //增加成功
+                }else{
+                    res.json({"status": "1"});//增加失败
+                }
                 connection .release();
+
             });
         });
     }

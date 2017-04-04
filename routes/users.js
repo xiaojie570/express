@@ -49,8 +49,8 @@ router.use(/.*limit$/,function (req,res,next) {
     userDao.queryName_Pass(req,res,next,matchLogin);
 });*/
 router.post('/login',function (req,res,next) {
-    var user_front = req.body.username;  //从前台接收的用户名
-    var pass_front = req.body.password; //从前台接收的密码
+    let user_front = req.body.username;  //从前台接收的用户名
+    let pass_front = req.body.password; //从前台接收的密码
 
     console.log(user_front);
     console.log(pass_front);
