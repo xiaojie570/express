@@ -97,7 +97,7 @@ module.exports = {
             connection.query($sql.selectPosition,req.body.position,function (err,result) {
                 var isExist;
                 console.log("=------------------------------------"+(result.length===0)+"=-------------------------------------------=====================selectPosition");
-                if(!result){ //如果result为假，说明不存在
+                if(result.length ===0){ //如果result为假，说明不存在
                     isExist = false;
                }else{
                     isExist = true;
@@ -126,6 +126,31 @@ module.exports = {
                    isExist = true;
                }
                carAdd(isExist);
+            });
+        });
+    },
+
+    selectByUsername:function (req,res,next) {
+        pool.getConnection(function (err,connection) {
+            connection.query($sql.selectByUsername,req.session.user.username,function (err,result) {
+                res.json(result);
+            })
+        })
+    },
+
+    //修改密码
+    modifyPassword : function (req,res,next) {
+        pool.getConnection(function (err, connection) {
+            console.log("req.body.password：",req.body.password);
+            console.log("req.session.user.username:",req.session.user.username);
+            connection.query($sql.modifyPassword,[req.body.password,req.session.user.username],function (err,result) {
+                var status;
+                if(!result){//修改不成功
+                    status = {"status":"1"};//修改不成功
+                }else{
+                    status = {"status":"0"};//修改成功
+                }
+                res.json(status);
             });
         });
     }

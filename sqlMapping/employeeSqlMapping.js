@@ -8,7 +8,9 @@ var employee = {
     selectEmployeePosition : "select position from employee_position",
     selectPosition : "select * from employee_position where position=?",
     selectEmployee_nameByPosition: "select employee_name from employee where position=?",
-    judgePositionAndEmployee : "select * from employee where position =? and employee_name=?"
+    judgePositionAndEmployee : "select * from employee where position =? and employee_name=?",
+    selectByUsername:"select * from employee where username=?",
+    modifyPassword:"update user set password=? where username=?"
 };
 //,telephone=?,location=?,position=?
 module.exports = employee;
