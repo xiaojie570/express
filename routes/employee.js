@@ -66,12 +66,19 @@ router.post('/logout',function (req,res,next) {
 
 //修改密码
 router.post('/modifyPassword',function (req,res,next) {
+    var front_password = req.body.password;
     console.log("modifyPassword-------req.session.user::",req.session.user);
-    if(!req.body.password ){
-        res.json({"status":"2"}); //密码为空
-    }else{
-        employeeDao.modifyPassword(req,res,next);
+    console.log("modifyPassword-------::",front_password);
+    function modifypass(password) {
+        if(!req.body.password){
+            res.json({"status":"2"}); //密码为空
+        }else if(front_password==password) {
+            res.json({"status": "3"});//新密码与原密码重复
+        }else{
+            employeeDao.modifyPassword(req,res,next);
+        }
     }
+    employeeDao.selectPasswordByUsername(req,res,next,modifypass);
 });
 
 module.exports = router;

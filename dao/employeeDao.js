@@ -133,8 +133,12 @@ module.exports = {
     selectByUsername:function (req,res,next) {
         pool.getConnection(function (err,connection) {
             connection.query($sql.selectByUsername,req.session.user.username,function (err,result) {
-                res.json(result);
-            })
+                result.forEach(item => {
+                    delete item["id"];
+                    delete item["username"];
+                });
+                res.json(result[0]);
+            });
         })
     },
 
@@ -151,7 +155,23 @@ module.exports = {
                     status = {"status":"0"};//修改成功
                 }
                 res.json(status);
+                connection.release();
             });
+        });
+    },
+
+    //查找原有密码
+    selectPasswordByUsername:function (req,res,next,modifypass) {
+        pool.getConnection(function (err,connection) {
+            connection.query($sql.selectPasswordByUsername,req.session.user.username,function (err,result) {
+                let resultArr = result.map(item =>{
+                    return item.password;
+                });
+                console.log("resultArr:"+resultArr);
+                //res.json(resultArr);
+                modifypass(resultArr);
+                connection.release();
+            })
         });
     }
 
