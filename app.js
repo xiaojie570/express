@@ -10,6 +10,7 @@ var users = require('./routes/users');
 var employee = require('./routes/employee');
 var car = require('./routes/car');
 var storage_location = require('./routes/storage_location');
+var goods = require('./routes/goods');
 //var node_dev = require('node-dev');
 
 var app = express();
@@ -82,7 +83,7 @@ app.use(function (req,res,next){
     console.log("------------------------" + (req.url == '/users/login'));
     console.log(req.body.username);
 
-    if((req.body.username==null)||(req.url == '/users/registerUser')||(req.url == '/users/login')) {
+    /*if((req.body.username==null)||(req.url == '/users/registerUser')||(req.url == '/users/login')) {
         console.log(req.url == '/users/registerUser/');
 
         if (req.url == '/users/login') {
@@ -103,7 +104,25 @@ app.use(function (req,res,next){
         else{
             next();
         }
+    }*/
+
+
+    if((req.url == '/users/registerUser')||(req.url == '/users/login')) {
+        console.log(req.url == '/users/registerUser/');
+        next();
+    }else if(req.url == '/users/register_judgeUsername') {
+        next();
+    }else{
+        if(!req.session.user){
+            res.json({"status":"3"});// 返回登录页
+        }else{
+            console.log("next...........");
+            next();
+        }
+
     }
+
+
 });
 //session 处理
 
@@ -114,7 +133,7 @@ app.use('/users', users); // 自定义路径
 app.use('/employee', employee);
 app.use('/car', car);
 app.use('/storage_location',storage_location);
-
+app.use('/goods',goods);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -67,14 +67,14 @@ router.post('/login',function (req,res,next) {
             function matchUsername(username,password) {
                 console.log("-----------------------------------------------------");
                 if(username != user_front){
-                    user = {"status":"1"};
+                    user = {"status":"1"};  //用户名为空
                     res.json(user);
                     //res.render('suc');
                 }
                 else if(password != pass_front){
+                    console.log("密码错误");
                     user = {"status":"2"};
                     res.json(user);
-
                     //res.render('fail');
                 }
             }
@@ -110,7 +110,7 @@ router.post('/registerUser', function(req, res, next) {
         if (isEmpty){
             console.log(req.body.username + "-------------------------------------register");
             if(!req.body.password){
-                res.json({"status":"2"});
+                res.json({"status":"2"}); //密码为空
             }else{
                 userDao.add(req, res, next);
                 employeeDao.add(req,res,next);
