@@ -9,10 +9,15 @@ var goodsDao = require('../dao/goodsDao');
 var storage_locationDao = require('../dao/storage_locationDao');
 
 router.post('/addGoods',function (req,res,next) {
-    function locExist() {
-        
+    var front_count = req.body.count;
+    function locExist(isExist,count) {
+        if(isExist){ //如果仓库存在
+            if(front_count){
+
+            }
+        }
     }
-    goodsDao.addGoods(req,res,next);
+    storage_locationDao.findLoc(req,res,next,locExist);
 });
 
 module.exports = router;

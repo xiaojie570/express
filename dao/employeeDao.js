@@ -37,7 +37,7 @@ module.exports = {
             var telephone = req.body.telephone;
             var location = req.body.location;
             var position = req.body.position;
-            var username = req.session.user.username;
+            var username = req.newUsername;
             connection.query($sql.updateByusername,[employee_name,telephone,location,position,username],function (err,result) {
                 console.log(position+"------------------updateByusername------------");
                 if(result!=null){     // 更新成功
@@ -96,7 +96,6 @@ module.exports = {
         pool.getConnection(function(err,connection){
             connection.query($sql.selectPosition,req.body.position,function (err,result) {
                 var isExist;
-                console.log("=------------------------------------"+(result.length===0)+"=-------------------------------------------=====================selectPosition");
                 if(result.length ===0){ //如果result为假，说明不存在
                     isExist = false;
                }else{
@@ -132,7 +131,7 @@ module.exports = {
 
     selectByUsername:function (req,res,next) {
         pool.getConnection(function (err,connection) {
-            connection.query($sql.selectByUsername,req.session.user.username,function (err,result) {
+            connection.query($sql.selectByUsername,req.newUsername,function (err,result) {
                 result.forEach(item => {
                     delete item["id"];
                     delete item["username"];
@@ -147,7 +146,7 @@ module.exports = {
         pool.getConnection(function (err, connection) {
             console.log("req.body.password：",req.body.password);
             console.log("req.session.user.username:",req.session.user.username);
-            connection.query($sql.modifyPassword,[req.body.password,req.session.user.username],function (err,result) {
+            connection.query($sql.modifyPassword,[req.body.password,req.newUsername],function (err,result) {
                 var status;
                 if(!result){//修改不成功
                     status = {"status":"1"};//修改不成功
@@ -163,7 +162,7 @@ module.exports = {
     //查找原有密码
     selectPasswordByUsername:function (req,res,next,modifypass) {
         pool.getConnection(function (err,connection) {
-            connection.query($sql.selectPasswordByUsername,req.session.user.username,function (err,result) {
+            connection.query($sql.selectPasswordByUsername,req.newUsername,function (err,result) {
                 let resultArr = result.map(item =>{
                     return item.password;
                 });
@@ -171,7 +170,7 @@ module.exports = {
                 //res.json(resultArr);
                 modifypass(resultArr);
                 connection.release();
-            })
+            });
         });
     }
 

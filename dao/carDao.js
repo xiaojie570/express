@@ -33,7 +33,7 @@ module.exports = {
                 if(result) {
                     res.json({"status": "0"}); //增加成功
                 }else{
-                    res.json({"status": "1"});//增加失败
+                    res.json({"status": "6"});//增加失败
                 }
                 connection .release();
             });
@@ -93,9 +93,9 @@ module.exports = {
         pool.getConnection(function (err,connection) {
             connection.query($sql.queryOneCar,req.body.id,function (err,result) {
                 if(result) {
-                    res.json(result);
+                    res.json(result[0]);
                 }else{
-                    res.json({"status":'0'});//查询失败
+                    res.json({"status":'1'});//查询失败
                 }
                 connection .release();
             });
