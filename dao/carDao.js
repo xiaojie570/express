@@ -40,18 +40,38 @@ module.exports = {
         });
     },
 
-    querryAllCar:function (req,res,next) {
+    queryAllCar:function (req,res,next) {
         pool.getConnection(function (err,connection) {
-            connection.query($sql.querryAllCar,function (err,result) {
+            connection.query($sql.queryAllCar,function (err,result) {
                 if(result.length === 0){
                     var status = {"status":1};
                 }else{
                     res.json(result);
                 }
                 res.json(status);
+                connection .release();
             });
         });
     },
+
+    /*queryAllCar:function (req,res,next,returnIdandInfo) {
+         pool.getConnection(function (err,connection) {
+             connection.query($sql.queryAllCar,function (err,result) {
+                 if(result.length === 0){
+                     var status = {"status":1};
+                     res.json(status);
+                 }else {
+                     var resultAll = result.map(item => {
+                         return item.id;
+                     });
+                 }
+
+                 returnIdandInfo(result,resultAll);
+                 //res.json(result);
+             });
+         });
+     },*/
+
     //不可以重复添加（车牌号和司机）
     judegEmployee_nameAndlicense_plate:function (req,res,next,judegExist) {
         pool.getConnection(function (err,connection) {
@@ -63,6 +83,53 @@ module.exports = {
                     isExist = true;
                 }
                 judegExist(isExist);
+                connection .release();
+            });
+        });
+    },
+
+    //查询一个车辆的信息
+    queryOneCar: function (req,res,next) {
+        pool.getConnection(function (err,connection) {
+            connection.query($sql.queryOneCar,req.body.id,function (err,result) {
+                if(result) {
+                    res.json(result);
+                }else{
+                    res.json({"status":'0'});//查询失败
+                }
+                connection .release();
+            });
+        });
+    },
+
+    //更改一个车辆信息
+    updateOneCarInfo:function (req,res,next) {
+        pool.getConnection(function (err,connection) {
+            connection.query($sql.updateOneCarInfo,[req.body.position,req.body.employee_name,req.body.license_plate],function (errr,result) {
+                console.log("updateOneCarInfo+++++++++++"+result+"----------"+req.body.position);
+                if(!result){
+                    status = {"status":"1"};//更新失败
+                }else{
+                    status = {"status":"0"};//更新成功
+                }
+                res.json(status);
+                connection .release();
+            });
+        });
+    },
+
+    //删除一辆汽车
+    deleteOneCarBylicense_plate:function (req,res,next) {
+        pool.getConnection(function (err, connection) {
+            connection.query($sql.deleteOneCarBylicense_plate,[req.body.license_plate,req.body.employee_name],function (err,result) {
+               var status;
+                if(!result){
+                    status = {"status":"1"};//删除失败
+               }else{
+                    status = {"status":"0"}; //删除成功
+                }
+                res.json(status);
+                connection .release();
             });
         });
     }
