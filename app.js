@@ -12,7 +12,7 @@ var car = require('./routes/car');
 var storage_location = require('./routes/storage_location');
 var goods = require('./routes/goods');
 //var node_dev = require('node-dev');
-
+const  jwt = require('jsonwebtoken');
 var app = express();
 
 //session
@@ -82,7 +82,7 @@ app.use(function (req,res,next){
     console.log(req.session.user);
     console.log("------------------------" + (req.url == '/users/login'));
     console.log(req.body.username);
-
+    console.log(req.headers["authorization"]);
     /*if((req.body.username==null)||(req.url == '/users/registerUser')||(req.url == '/users/login')) {
         console.log(req.url == '/users/registerUser/');
 
@@ -113,16 +113,22 @@ app.use(function (req,res,next){
     }else if(req.url == '/users/register_judgeUsername') {
         next();
     }else{
-        if(!req.session.user){
+        let user = jwt.verify(req.headers["authorization"],'fjqc');
+        console.log(user);
+        if(!user.username){
+            res.json({"status":"3"});
+        } else {
+            req["newUsername"] = user.username;
+            console.log(req["newUsername"]);
+            next();
+        }
+        /* if(/!*!req.session.user*!/){
             res.json({"status":"3"});// 返回登录页
         }else{
             console.log("next...........");
             next();
-        }
-
+        } */
     }
-
-
 });
 //session 处理
 

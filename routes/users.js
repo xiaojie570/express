@@ -2,7 +2,8 @@ var express = require('express');
 var router = express.Router();
 
 var userDao = require('../dao/userDao');
-var employeeDao = require('../dao/employeeDao')
+var employeeDao = require('../dao/employeeDao');
+const jwt = require('jsonwebtoken');
 /* GET users listing. */
 /*router.get('/', function(req, res, next) {
   //res.send('respond with a resource');
@@ -59,9 +60,14 @@ router.post('/login',function (req,res,next) {
         if(req.body.username==username&&req.body.password==password){
             console.log("--------------------------------用户名密码正确");
             var user = {"username":username};
-            req.session.user = user;
-            console.log(req.session.user);
+            /*req.session.user = user;
+            console.log(req.session.user);*/
             user = {"status":0};  //用户名密码正确
+            let token = jwt.sign({
+                username:username,
+                password:password
+            },'fjqc');
+            user['token'] = token;
             res.json(user);
         }else {
             function matchUsername(username,password) {
@@ -130,8 +136,8 @@ router.post('/register_judgeUsername',function (req,res,next) {
 
 //查询所有user
 router.get('/queryAll', function(req, res, next) {
+    let user = Symbol.for('newUser');
     console.log('查询所有user');
-    console.log(req.session.user);
     console.log('查询所有user');
     userDao.queryAll(req, res, next);
 });

@@ -93,7 +93,7 @@ module.exports = {
             return;
         }
         pool.getConnection(function(err, connection) {
-            connection.query($sql.update, [param.upassword, +param.id], function(err, result) {
+            connection.query($sql.update, [param.upassword, param.id], function(err, result) {
                 // 使用页面进行跳转提示
                 if(result.affectedRows > 0) {
                     res.render('suc', {
@@ -164,7 +164,7 @@ module.exports = {
 
     //判断用户名和密码其中是否一个有问题
     login_correct: function (req,res,next,matchUsername) {
-        var username = req.body.username; // 为了拼凑正确的sql语句，这里要转下整数
+        var username = req.body.username;
         var password = req.body.password;
 
         console.log("============================================="+password);

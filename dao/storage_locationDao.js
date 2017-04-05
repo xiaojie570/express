@@ -57,7 +57,17 @@ module.exports ={
 
            });
         });
+    },
+
+    //判断仓库是否存在
+    findLoc:function (req,res,next,locExist) {
+        pool.getConnection(function (err,connection) {
+            connection.query($sql.findLoc,req.body.id,function (err,result) {
+                
+            });
+        });
     }
+
 
 
 };
