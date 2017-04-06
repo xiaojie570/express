@@ -25,18 +25,29 @@ var jsonWrite = function (res,ret) {
 
 module.exports = {
     //增加货物
-    addGoods:function (req,res,next) {
-        pool.getConnection(function (err,connection) {
-            connection.query($sql.addGoods,[req.body.loc_id,req.body.count,req.body.goods_name],function (err,result) {
+    addGoods: function (req, res, next) {
+        pool.getConnection(function (err, connection) {
+            connection.query($sql.addGoods, [req.body.loc_id, req.body.count, req.body.goods_name], function (err, result) {
                 var status;
-                if(result){
-                    status = {"status":"0"}; //增加成功
-                }else{
-                    status = {"status":"1"}; //增加失败
+                if (result) {
+                    status = {"status": "0"}; //增加成功
+                } else {
+                    status = {"status": "1"}; //增加失败
                 }
                 res.json(status);
             })
         });
+    },
+
+    //通过货物id查找货物的储位
+    selectByGood_id: function (req, res, next, next1) {
+        pool.getConnection(function (err, connection) {
+            connection.query($sql.selectByGood_id, req.body.loc_id, function (err, result) {
+                console.log(result[0]["loc_id"]);
+                console.log("+++++++++++");
+                next1(result[0]["loc_id"]);
+            })
+        });
     }
-};
+}
 

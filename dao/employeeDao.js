@@ -25,7 +25,8 @@ module.exports = {
     //在注册用户的时候，自动插入员工信息
     add:function (req,res,next) {
         pool.getConnection(function (err,connection) {
-            connection.query($sql.add,req.body.username,function (err,result) {
+            var employee_name = '我是用户名';
+            connection.query($sql.add,[req.body.username,employee_name],function (err,result) {
                 connection.release();
             });
         });
