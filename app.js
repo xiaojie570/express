@@ -120,7 +120,7 @@ app.use(function (req,res,next){
             res.json({"status":"3"});
         } else {
             if(req.body.token){
-                req["newUsername"] = user.username;
+                req["newUsername"] = req.body.token;
                 next();
             }else{
                 res.json({"status":"3"});//token不存在

@@ -2001,3 +2001,6 @@
 ::1 - - [06/Apr/2017:03:35:44 +0000] "POST /users/login HTTP/1.1" 200 175 "-" "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.110 Safari/537.36"
 ::1 - - [06/Apr/2017:03:37:27 +0000] "POST /users/login HTTP/1.1" 200 175 "-" "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.110 Safari/537.36"
 ::1 - - [06/Apr/2017:03:37:35 +0000] "POST /goods_flow/addGoods_flow HTTP/1.1" 200 14 "-" "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.110 Safari/537.36"
+::1 - - [06/Apr/2017:07:46:04 +0000] "POST /users/login HTTP/1.1" 200 175 "-" "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.110 Safari/537.36"
+::1 - - [06/Apr/2017:07:46:33 +0000] "POST /goods_flow/addGoods_flow HTTP/1.1" 200 14 "-" "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.110 Safari/537.36"
+::1 - - [06/Apr/2017:07:46:58 +0000] "POST /goods_flow/addGoods_flow HTTP/1.1" 200 14 "-" "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.110 Safari/537.36"

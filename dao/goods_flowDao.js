@@ -14,7 +14,7 @@ var pool  = mysql.createPool($util.extend({}, $conf.mysql));
 module.exports = {
     addGoods_flow:function (req,res,next) {
         pool.getConnection(function (err,connection) {
-           connection.query($sql.addGoods_flow,[req.body.goods_id,req.body.loc_id,req.body.car_id,req.body.type,req.newUsername],function (err,result) {
+           connection.query($sql.addGoods_flow,[req.body.goods_id,req.body.loc_id,req.body.car_id,req.body.type,req.body.count,req.body.money,req.newUsername],function (err,result) {
                var status;
                if(result){
                    status = {"status":"0"}; //增加成功
