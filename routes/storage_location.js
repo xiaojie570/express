@@ -25,5 +25,4 @@ router.post('/updateOnestorage_locationbyId',function (req,res,next) {
     storage_locationDao.updateOnestorage_locationbyId(req,res,next,queryAllAfterUpdate);
 });
 
-
 module.exports = router;
