@@ -62,6 +62,7 @@ module.exports = {
                     a = true;
                 }
                 findOne(a);
+                connection .release();
             });
         });
     },
@@ -75,6 +76,7 @@ module.exports = {
                     return item.position;
                 });
                 jsonWrite(res,resultArr);
+                connection .release();
             });
             
         });
@@ -88,6 +90,7 @@ module.exports = {
                     return item.employee_name;
                 });
                 jsonWrite(res,resultArr);
+                connection .release();
             })
         })
     },
@@ -103,6 +106,7 @@ module.exports = {
                     isExist = true;
                 }
                 updateInfo(isExist,mySelf);
+                connection .release();
             });
         });
     },
@@ -126,6 +130,7 @@ module.exports = {
                    isExist = true;
                }
                carAdd(isExist);
+               connection .release();
             });
         });
     },
@@ -141,6 +146,7 @@ module.exports = {
                     result
                 }
                 res.json(result[0]);
+                connection .release();
             });
         })
     },
