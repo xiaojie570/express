@@ -7,7 +7,8 @@ var car = {
     judegEmployee_nameAndlicense_plate:"select * from car where employee_name=? and license_plate=?",
     queryOneCar:"select * from car where id=?",
     updateOneCarInfo:"update car set position=?,employee_name=? where license_plate=?",
-    deleteOneCarBylicense_plate:"delete from car where license_plate=? and employee_name=?"
+    deleteOneCarId:"delete from car where id=?"
+
 };
 
 module.exports = car;
