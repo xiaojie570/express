@@ -40,11 +40,11 @@ module.exports ={
         });
     },
 
-    //更改一个仓库的信息
+    //更改一个仓库的信息 之后显示所有仓库的信息
     updateOnestorage_locationbyId:function (req,res,next,queryAllAfterUpdate) {
         var self = this;
         pool.getConnection(function (err,connection) {
-           connection.query($sql.updateOnestorage_locationbyId,[req.body.size,req.body.id],function (err,result) {
+           connection.query($sql.updateOnestorage_locationbyId,[req.body.size,req.body.loc_id],function (err,result) {
                var suc;
                console.log(result);
                console.log((result.length ===0)+"++++++++++++++++++++++++");
@@ -54,16 +54,38 @@ module.exports ={
                    suc = true;//更新成功
                 }
                queryAllAfterUpdate(self,suc);
+               connection.release();
 
            });
+        });
+    },
+
+    ///更改一个仓库的信息,只修改剩余位置大小
+    updateOnestorageSize:function (req,res,next) {
+        var self = this;
+        pool.getConnection(function (err,connection) {
+            connection.query($sql.updateOnestorageSizebyId,[req.surplus_size,req.body.loc_id],function (err,result) {
+                connection.release();
+            });
         });
     },
 
     //判断仓库是否存在
     findLoc:function (req,res,next,locExist) {
         pool.getConnection(function (err,connection) {
-            connection.query($sql.findLoc,req.body.id,function (err,result) {
-                
+            connection.query($sql.findLoc,req.body.loc_id,function (err,result) {
+                var isExist;
+                //console.log(result[0]["size"]);
+                if(result) {
+                    if (result.length === 0) {
+                        isExist = false;  //仓库不存在
+                        locExist(isExist,0);
+                    } else {
+                        isExist = true;
+                        locExist(isExist,result[0]["surplus_size"]);
+                    }
+
+                }
             });
         });
     }
