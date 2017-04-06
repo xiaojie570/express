@@ -22,7 +22,9 @@ var jsonWrite = function (res,ret) {
     }
 };
 
+
 module.exports = {
+    //增加货物
     addGoods:function (req,res,next) {
         pool.getConnection(function (err,connection) {
             connection.query($sql.addGoods,[req.body.loc_id,req.body.count,req.body.goods_name],function (err,result) {
@@ -37,3 +39,4 @@ module.exports = {
         });
     }
 };
+
