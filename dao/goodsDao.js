@@ -44,12 +44,66 @@ module.exports = {
     selectByGood_id: function (req, res, next, next1) {
         pool.getConnection(function (err, connection) {
             connection.query($sql.selectByGood_id, req.body.goods_id, function (err, result) {
-                console.log(result[0]["loc_id"]);
+                console.log("++++++++++++++++++---------------**************");
+                //console.log(result[0]["loc_id"]);
                 console.log("+++++++++++");
-                next1(result[0]["loc_id"]);
+                if(result.length===0){
+                    next1(null);
+                }else {
+                    next1(result[0]["loc_id"]);
+                }
                 connection .release();
             })
         });
+    },
+
+    //按照id来查找货物的数量
+    selectCountByid:function (req,res,next,next2) {
+        pool.getConnection(function (err,connection) {
+           connection.query($sql.selectCount,req.body.goods_id,function (err,result){
+              if(result.length ==0){
+                  isExist = false;
+                  next2(0,isExist);
+              }else{
+                  isExist = true;
+                  next2(result[0]["count"],isExist);
+              }
+               connection.release();
+           });
+        });
+    },
+
+
+    //更新货物的数量
+    updateCount:function (req,res,next) {
+        pool.getConnection(function (err,connection) {
+            connection.query($sql.updateCount,[req.newCount,req.body.goods_id],function (err,result) {
+                connection.release();
+            })
+        })
+    },
+
+    //通过id查找是否有该货物
+    isExistGood:function (req,res,next,GoodId) {
+        pool.getConnection(function (err,connection) {
+           connection.query($sql.isExistGood,req.body.goods_id,function (err,result) {
+               var isExist;
+               console.log(result);
+               console.log("11111111111111111");
+               if(result) {
+                   if (result.length === 0) {
+                       isExist = false;
+                   } else {
+                       isExist = true;
+                   }
+               }else{
+                   isExist = false;
+               }
+               GoodId(isExist);
+               connection.release();
+           });
+        });
     }
+
 }
 

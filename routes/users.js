@@ -68,6 +68,7 @@ router.post('/login',function (req,res,next) {
                 password:password
             },'fjqc');
             user['token'] = token;
+
             res.json(user);
         }else {
             function matchUsername(username,password) {

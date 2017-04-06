@@ -37,6 +37,7 @@ router.post('/addCar',function (req,res,next) {
 
 //查询所有车辆
 router.post('/queryAllCar',function (req,res,next) {
+    console.log("queryAllCar++++++++++");
     carDao.queryAllCar(req,res,next);
 });
 

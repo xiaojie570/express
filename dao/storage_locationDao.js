@@ -66,7 +66,7 @@ module.exports ={
     updateOnestorageSize:function (req,res,next) {
         var self = this;
         pool.getConnection(function (err,connection) {
-            connection.query($sql.updateOnestorageSizebyId,[req.surplus_size,req.body.loc_id],function (err,result) {
+            connection.query($sql.updateOnestorageSizebyId,[req.body.surplus_size,req.loc_id],function (err,result) {
                 connection.release();
             });
         });
@@ -91,8 +91,15 @@ module.exports ={
                 connection .release();
             });
         });
+    },
+
+    //通过Loc_id查询剩余位置
+    querySurplus_sizeByLoc_id:function (req,res,next,n) {
+        pool.getConnection(function (err,connection) {
+           connection.query($sql.querySurplus_sizeByLoc_id,req.loc_id,function (err,result) {
+               n(result[0]["surplus_size"]);
+               connection .release();
+           });
+        });
     }
-
-
-
 };

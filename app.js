@@ -113,23 +113,17 @@ app.use(function (req,res,next){
         next();
     }else if(req.url == '/users/register_judgeUsername') {
         next();
-    }else{
-        let user = jwt.verify(req.body.token,'fjqc');
+    }else {
+        let user = jwt.verify(req.body.token, 'fjqc');
         console.log(user);
-        if(!req.body.token){
-            res.json({"status":"3"});
+        if (!req.body.token) {
+            res.json({"status": "3"});
         } else {
+            console.log("++++++++++++");
             req["newUsername"] = user.username;
             next();
             console.log(req["newUsername"]);
-
         }
-        /* if(/!*!req.session.user*!/){
-            res.json({"status":"3"});// 返回登录页
-        }else{
-            console.log("next...........");
-            next();
-        } */
     }
 });
 //session 处理

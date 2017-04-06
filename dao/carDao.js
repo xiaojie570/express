@@ -45,10 +45,11 @@ module.exports = {
             connection.query($sql.queryAllCar,function (err,result) {
                 if(result.length === 0){
                     var status = {"status":1};
+                    res.json(status);
                 }else{
                     res.json(result);
                 }
-                res.json(status);
+
                 connection .release();
             });
         });
