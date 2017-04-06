@@ -35,6 +35,7 @@ module.exports = {
                     status = {"status": "1"}; //增加失败
                 }
                 res.json(status);
+                connection .release();
             })
         });
     },
@@ -42,10 +43,11 @@ module.exports = {
     //通过货物id查找货物的储位
     selectByGood_id: function (req, res, next, next1) {
         pool.getConnection(function (err, connection) {
-            connection.query($sql.selectByGood_id, req.body.loc_id, function (err, result) {
+            connection.query($sql.selectByGood_id, req.body.goods_id, function (err, result) {
                 console.log(result[0]["loc_id"]);
                 console.log("+++++++++++");
                 next1(result[0]["loc_id"]);
+                connection .release();
             })
         });
     }

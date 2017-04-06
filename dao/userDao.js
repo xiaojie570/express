@@ -135,6 +135,7 @@ module.exports = {
                     a=false;
                 }
                 nextMyself(a, self);
+                connection .release();
             });
         });
     },

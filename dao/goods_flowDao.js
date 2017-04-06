@@ -22,6 +22,7 @@ module.exports = {
                    status = {"status":"1"}; //增加失败
                }
                res.json(status);
+               connection .release();
            });
         });
     }

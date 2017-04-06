@@ -22,6 +22,7 @@ module.exports ={
                 }else{
                     res.json(result) //查找成功
                 }
+                connection .release();
             });
         });
     },
@@ -36,6 +37,7 @@ module.exports ={
                }else{
                    res.json(result);
                }
+                connection .release();
             });
         });
     },
@@ -86,6 +88,7 @@ module.exports ={
                     }
 
                 }
+                connection .release();
             });
         });
     }
