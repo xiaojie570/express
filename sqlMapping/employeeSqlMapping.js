@@ -3,7 +3,7 @@
  */
 var employee = {
     updateByusername:"update employee set employee_name=?, telephone=?,location=?,position=? where username=?",
-    add:"insert into employee(id,username) values(0,?)",
+    add:"insert into employee(id,username,employee_name) values(0,?,?)",
     //findByUsername:"select * from employee where username = ?"
     selectEmployeePosition : "select position from employee_position",
     selectPosition : "select * from employee_position where position=?",

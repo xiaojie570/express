@@ -24,7 +24,11 @@ router.post('/addGoods_flow',function (req,res,next){
     }else if(!req.body.money){
         res.json({"status":"6"});//货物金额为空
     }else {
-        goods_flowDao.addGoods_flow(req, res, next);
+        function next1(loc_id) {
+
+        }
+        goodsDao.selectByGood_id(req,res,next1);
+        /*goods_flowDao.addGoods_flow(req, res, next);*/
     }
 });
 
