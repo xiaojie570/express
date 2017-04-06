@@ -136,6 +136,9 @@ module.exports = {
                     delete item["id"];
                     delete item["username"];
                 });
+                if(result.length == 0 ){
+                    result
+                }
                 res.json(result[0]);
             });
         })

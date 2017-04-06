@@ -20,7 +20,7 @@ var employeeDao =require('../dao/employeeDao');
 //点击更新提交的时候（所有更新信息）要先判断职位是否存在
 router.post('/updateStaffposition',function (req,res,next) {
      function updateInfo(isExists,employeeDao) {
-          if(isExists){ //存在,存在可以插入
+          if(isExists||!req.body.position){ //存在,存在可以插入
              employeeDao.updateByusername(req,res,next);
          }else{//不存在，不可以插入
              res.json({"status":"2"});//position不存在
@@ -58,9 +58,9 @@ router.post('/selectByUsername',function (req,res,next) {
 
 //注销
 router.post('/logout',function (req,res,next) {
-    console.log("before modify:"+req.session.user);
-    req.session.user=null;
-    console.log("after modify:"+req.session.user);
+    console.log("before modify:"+req.newUsername);
+    req.newUsername=null;
+    console.log("after modify:"+req.newUsername);
     var status = {"status":"0"};
     res.json(status);
 });

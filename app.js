@@ -114,12 +114,12 @@ app.use(function (req,res,next){
     }else if(req.url == '/users/register_judgeUsername') {
         next();
     }else{
-        /*let user = jwt.verify(req.headers["authorization"],'fjqc');
-        console.log(user);*/
+        let user = jwt.verify(req.body.token,'fjqc');
+        console.log(user);
         if(!req.body.token){
             res.json({"status":"3"});
         } else {
-            req["newUsername"] = req.body.token;
+            req["newUsername"] = user.username;
             next();
             console.log(req["newUsername"]);
 

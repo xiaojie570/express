@@ -31,4 +31,8 @@ router.post('/addGoods',function (req,res,next) {
     storage_locationDao.findLoc(req,res,next,locExist);
 });
 
+//按照货物的id查找其所在的储位
+router.post('/selectByGood_id',function (req,res,next) {
+    
+})
 module.exports = router;
