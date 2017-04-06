@@ -114,17 +114,13 @@ app.use(function (req,res,next){
     }else if(req.url == '/users/register_judgeUsername') {
         next();
     }else{
-        let user = jwt.verify(req.headers["authorization"],'fjqc');
-        console.log(user);
-        if(!user.username){
+        /*let user = jwt.verify(req.headers["authorization"],'fjqc');
+        console.log(user);*/
+        if(!req.body.token){
             res.json({"status":"3"});
         } else {
-            if(req.body.token){
-                req["newUsername"] = req.body.token;
-                next();
-            }else{
-                res.json({"status":"3"});//token不存在
-            }
+            req["newUsername"] = req.body.token;
+            next();
             console.log(req["newUsername"]);
 
         }
