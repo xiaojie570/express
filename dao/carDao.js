@@ -120,9 +120,9 @@ module.exports = {
     },
 
     //删除一辆汽车
-    deleteOneCarBylicense_plate:function (req,res,next) {
+    deleteOneCarId:function (req,res,next) {
         pool.getConnection(function (err, connection) {
-            connection.query($sql.deleteOneCarBylicense_plate,[req.body.license_plate,req.body.employee_name],function (err,result) {
+            connection.query($sql.deleteOneCarId,req.body.id,function (err,result) {
                var status;
                 if(!result){
                     status = {"status":"1"};//删除失败

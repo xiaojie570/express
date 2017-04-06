@@ -67,6 +67,11 @@ router.post('/queryOneCar',function (req,res,next) {
     carDao.queryOneCar(req,res,next);
 });
 
+//删除一辆汽车
+router.post('/deleteOneCarId',function (req,res,next) {
+    carDao.deleteOneCarId(req,res,next);
+})
+
 //更改一个车辆的信息
 router.post('/updateOneCarInfo',function (req,res,next) {
     console.log("updateOneCarInfo++++++++++"+"carjssssssssss");
