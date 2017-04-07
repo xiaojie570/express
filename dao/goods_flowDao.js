@@ -76,4 +76,14 @@ module.exports = {
             })
         })
     },
+
+    //查询所有出入库信息
+    queryAll:function (req,res,next) {
+        pool.getConnection(function (err, connection) {
+            connection.query($sql.queryAll,function (err,result) {
+                res.json(result);
+                connection.release();
+            })
+        });
+    }
 };

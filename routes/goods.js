@@ -26,6 +26,7 @@ router.post('/addGoods',function (req,res,next) {
                             req["loc_id"] = loc_id;
                             storage_locationDao.updateGoods_id(req, res, next);
                             goodsDao.queryOne(req,res,next);
+                            
                         }
                     }
                     goodsDao.selectGood_idByGood_name(req,res,next,nextMethod);
