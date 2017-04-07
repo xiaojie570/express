@@ -68,7 +68,8 @@ router.post('/queryOneCar',function (req,res,next) {
 });
 
 //删除一辆汽车
-router.post('/deleteOneCarId',function (req,res,next) {
+router.post('/' +
+    '',function (req,res,next) {
     carDao.deleteOneCarId(req,res,next);
 })
 

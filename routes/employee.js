@@ -5,17 +5,6 @@ var express = require('express');
 var router = express.Router();
 var employeeDao =require('../dao/employeeDao');
 
-/*router.post('/updateInfo_Staff',function (req,res,next) {
-    function updateInfo(isExists,employeeDao) {
-        if(isExists){
-            employeeDao.updateByStaffid(req,res,next);
-        }else{
-            res.json({"status":"1"});//position不存在
-        }
-    }
-    employeeDao.selectPosition(req,res,next);
-});*/
-
 
 //点击更新提交的时候（所有更新信息）要先判断职位是否存在
 router.post('/updateStaffposition',function (req,res,next) {
@@ -44,12 +33,6 @@ router.post('/selectEmployee_nameByPosition',function (req,res,next) {
     employeeDao.selectEmployee_nameByPosition(req,res,next);
 });
 
-
-/*
-router.get('/updateInfo_Staff',function (req,res,next) {
-    res.render('updateemployee');
-});
-*/
 // 查出我的信息的 username
 router.post('/selectByUsername',function (req,res,next) {
 
@@ -82,4 +65,8 @@ router.post('/modifyPassword',function (req,res,next) {
     employeeDao.selectPasswordByUsername(req,res,next,modifypass);
 });
 
+//查询所有员工信息
+router.post('/queryAll',function (req,res,next) {
+    employeeDao.queryAll(req,res,next);
+});
 module.exports = router;

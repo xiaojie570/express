@@ -154,14 +154,12 @@ module.exports = {
     //修改密码
     modifyPassword : function (req,res,next) {
         pool.getConnection(function (err, connection) {
-            console.log("req.body.password：",req.body.password);
-            console.log("req.session.user.username:",req.session.user.username);
-            connection.query($sql.modifyPassword,[req.body.password,req.newUsername],function (err,result) {
+               connection.query($sql.modifyPassword,[req.body.password,req.newUsername],function (err,result) {
                 var status;
-                if(!result){//修改不成功
-                    status = {"status":"1"};//修改不成功
-                }else{
+                if(result.affectedRows > 0){
                     status = {"status":"0"};//修改成功
+                }else{
+                    status = {"status":"1"};//修改不成功
                 }
                 res.json(status);
                 connection.release();
@@ -182,6 +180,17 @@ module.exports = {
                 connection.release();
             });
         });
+    },
+
+
+    //查询所有员工信息
+    queryAll:function (req,res,next) {
+        pool.getConnection(function (err,connection) {
+            connection.query($sql.queryAll,function (err,result) {
+                res.json(result);
+                connection.release();
+            })
+        })
     }
 
 };

@@ -30,7 +30,7 @@ module.exports ={
     //查询一个仓库的信息
     queryOnestorage_locationbyId:function (req,res,next) {
         pool.getConnection(function (err,connection) {
-            connection.query($sql.queryOnestorage_locationbyId,req.body.id,function (err,result) {
+            connection.query($sql.queryOnestorage_locationbyId,req.body.loc_id,function (err,result) {
                console.log(result+"+++++++++++");
                if(result.length ===0){
                    res.json({"status":"1"}) //查找失败
@@ -50,10 +50,10 @@ module.exports ={
                var suc;
                console.log(result);
                console.log((result.length ===0)+"++++++++++++++++++++++++");
-               if(result.length ===0){
-                   suc = false;//更新失败
+               if(result.affectedRows > 0){
+                   suc = true;//更新失败
                 }else{
-                   suc = true;//更新成功
+                   suc = false;//更新成功
                 }
                queryAllAfterUpdate(self,suc);
                connection.release();
@@ -101,5 +101,45 @@ module.exports ={
                connection .release();
            });
         });
+    },
+
+    //增加一个仓库储位
+    addOne:function (req,res,next,nextMethod) {
+        var self = this;
+        pool.getConnection(function (err, connection) {
+            connection.query($sql.addOne,[req.body.size,req.body.size,0],function (err,result) {
+                var suc;
+                if(result.affectedRows>0){
+                    suc = true;
+                }else{
+                    suc = false;
+                }
+                nextMethod(self,suc);
+                connection.release();
+            });
+        })
+    },
+
+    //修改储位放置货物的id
+    updateGoods_id:function (req,res,next) {
+        var self = this;
+        pool.getConnection(function (err,connection) {
+            connection.query($sql.updateGoods_id,[req.goods_id,req.loc_id],function (err,result) {
+            connection.release();
+            });
+        })
+    },
+
+    //查找没有货物的储位置
+    queryNoGoods_id:function (req,res,next) {
+        pool.getConnection(function (err,connection) {
+            connection.query($sql.queryNoGoods_id,0,function (err,result) {
+                console.log(result);
+                console.log("++++++++++++++queryNoGoods_id+");
+                res.json(result);
+                connection.release();
+            });
+        });
     }
+
 };

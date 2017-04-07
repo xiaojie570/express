@@ -136,7 +136,7 @@ router.post('/register_judgeUsername',function (req,res,next) {
 });
 
 //查询所有user
-router.get('/queryAll', function(req, res, next) {
+router.post('/queryAll', function(req, res, next) {
     let user = Symbol.for('newUser');
     console.log('查询所有user');
     console.log('查询所有user');

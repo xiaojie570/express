@@ -93,16 +93,12 @@ module.exports = {
             return;
         }
         pool.getConnection(function(err, connection) {
-            connection.query($sql.update, [param.upassword, param.id], function(err, result) {
+            connection.query($sql.update, [req.body.password, req.newUsername], function(err, result) {
                 // 使用页面进行跳转提示
                 if(result.affectedRows > 0) {
-                    res.render('suc', {
-                        result: result
-                    }); // 第二个参数可以直接在jade中使用
+                    res.json({"status":"0"});  //更新成功
                 } else {
-                    res.render('fail',  {
-                        result: result
-                    });
+                    res.json({"status":"1"}); //更新失败
                 }
                 console.log(result);
                 connection.release();
