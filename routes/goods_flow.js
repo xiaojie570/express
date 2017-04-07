@@ -8,6 +8,7 @@ var router = express.Router();
 var goodsDao = require('../dao/goodsDao');
 var storage_locationDao = require('../dao/storage_locationDao');
 var goods_flowDao = require('../dao/goods_flowDao');
+var flow_typeDao = require('../dao/flow_typeDao');
 
 //增加货物流动信息
 router.post('/addGoods_flow',function (req,res,next){
@@ -87,5 +88,36 @@ router.post('/addGoods_flow',function (req,res,next){
     }
 });
 
+
+//查询入库出库类型
+router.post('/flow_typeDao',function (req,res,next) {
+   flow_typeDao.queryAllType(req,res,next);
+});
+
+//查询入库信息
+router.post('/queryInGoods',function (req,res,next) {
+    goods_flowDao.queryInGoods(req,res,next);
+});
+
+//查询出库信息
+router.post('/queryOutGoods',function (req,res,next) {
+    goods_flowDao.queryOutGoods(req,res,next);
+});
+
+//按照username来查找进出库
+router.post('/queryByUsername',function (req,res,next) {
+     goods_flowDao.queryByUsername(req,res,next);
+});
+
+//查找自己的入库信息
+router.post('/queryByUsernameAndIn',function (req,res,next) {
+    goods_flowDao.queryByUsernameAndIn(req,res,next);
+});
+
+//查找自己的出库信息
+router.post('/queryByUsernameAndOut',function (req,res,next) {
+    console.log("queryByUsernameAndOut++++++++");
+    goods_flowDao.queryByUsernameAndOut(req,res,next);
+});
 
 module.exports = router;

@@ -25,5 +25,55 @@ module.exports = {
                connection .release();
            });
         });
-    }
+    },
+
+    //查询入库信息
+    queryInGoods:function (req,res,next) {
+        pool.getConnection(function (err,connection) {
+            connection.query($sql.queryInGoods,"入库",function (err,result) {
+                res.json(result);
+                connection.release();
+            })
+        })
+    },
+
+    //查询出库信息
+    queryOutGoods:function (req,res,next) {
+        pool.getConnection(function (err,connection) {
+            connection.query($sql.queryInGoods,"出库",function (err,result) {
+                res.json(result);
+                connection.release();
+            })
+        })
+    },
+
+    //按照username来查找进出库
+    queryByUsername:function (req,res,next) {
+        pool.getConnection(function (err,connection) {
+            connection.query($sql.queryByUsername,req.newUsername,function (err,result) {
+                res.json(result);
+                connection.release();
+            })
+        })
+    },
+    
+    //查找自己的出库信息
+    queryByUsernameAndOut:function (req,res,next) {
+        pool.getConnection(function (err,connection) {
+            connection.query($sql.queryByUsernameAndOut,[req.newUsername,"出库"],function (err,result) {
+                res.json(result);
+                connection.release();
+            })
+        })
+    },
+
+    //查找自己的入库信息
+    queryByUsernameAndIn:function (req,res,next) {
+        pool.getConnection(function (err,connection) {
+            connection.query($sql.queryByUsernameAndOut,[req.newUsername,"入库"],function (err,result) {
+                res.json(result);
+                connection.release();
+            })
+        })
+    },
 };

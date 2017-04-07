@@ -19,10 +19,26 @@ router.post('/updateOnestorage_locationbyId',function (req,res,next) {
         if(suc){
             storage_locationDao.queryAll(req,res,next);
         }else{
-            res.json({"status":"2"});//更新失败
+            res.json({"status":"1"});//更新失败
         }
     }
     storage_locationDao.updateOnestorage_locationbyId(req,res,next,queryAllAfterUpdate);
 });
 
+//增加储位
+router.post('/addOne',function (req,res,next) {
+   function nextMethod(storage_locationDao,suc) {
+       if(suc){
+           storage_locationDao.queryAll(req,res,next);
+       }else{
+           res.json({"status":"1"});//更新失败
+       }
+   }
+   storage_locationDao.addOne(req,res,next,nextMethod);
+});
+
+//查找没有货物的储位
+router.post('/queryNoGoods_id',function (req,res,next) {
+   storage_locationDao.queryNoGoods_id(req,res,next);
+});
 module.exports = router;

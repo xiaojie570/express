@@ -6,7 +6,10 @@ var goods = {
     selectByGood_id:"select loc_id from goods where id=?",
     selectCount:"select count from goods where id=?",
     updateCount:"update goods set count=? where id=?",
-    isExistGood:"select * from goods where id=?"
+    isExistGood:"select * from goods where id=?",
+    selectGood_idByGood_name:"select * from goods where goods_name=?",
+    queryOne:"select * from goods where id =?",
+    queryAll:"select * from goods"
 };
 
 module.exports = goods;

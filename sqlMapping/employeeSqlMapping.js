@@ -11,7 +11,9 @@ var employee = {
     judgePositionAndEmployee : "select * from employee where position =? and employee_name=?",
     selectByUsername:"select * from employee where username=?",
     modifyPassword:"update user set password=? where username=?",
-    selectPasswordByUsername:"select password from user where username=?"
+    selectPasswordByUsername:"select password from user where username=?",
+    queryAll:"select * from employee"
+
 };
 //,telephone=?,location=?,position=?
 module.exports = employee;

@@ -28,13 +28,13 @@ module.exports = {
     addGoods: function (req, res, next) {
         pool.getConnection(function (err, connection) {
             connection.query($sql.addGoods, [req.body.loc_id, req.body.count, req.body.goods_name], function (err, result) {
-                var status;
+                /*var status;
                 if (result) {
                     status = {"status": "0"}; //增加成功
                 } else {
                     status = {"status": "1"}; //增加失败
                 }
-                res.json(status);
+                res.json(status);*/
                 connection .release();
             })
         });
@@ -103,7 +103,35 @@ module.exports = {
                connection.release();
            });
         });
+    },
+    
+    //通过货物的名字查找货物的goods_id
+    selectGood_idByGood_name:function (req,res,next,nextMethod) {
+        pool.getConnection(function (err,connection) {
+            connection.query($sql.selectGood_idByGood_name,req.body.goods_name,function (err,result) {
+                nextMethod(result[0]["id"],result[0]["loc_id"]);
+            });
+        })
+    },
+    
+    //查询一个货物的信息
+    queryOne:function (req,res,next) {
+        pool.getConnection(function (err,connection) {
+            connection.query($sql.queryOne,req.goods_id,function (err,result) {
+                res.json(result);
+                connection.release();
+            });
+        });
+    },
+    
+    //显示所有货物信息
+    queryAll:function (req,res,next) {
+        pool.getConnection(function (err,connection) {
+            connection.query($sql.queryAll,function (err,result) {
+                res.json(result);
+                connection.release();
+            })
+        })
     }
-
 }
 
