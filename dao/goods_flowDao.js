@@ -14,7 +14,12 @@ var pool  = mysql.createPool($util.extend({}, $conf.mysql));
 module.exports = {
     addGoods_flow:function (req,res,next) {
         pool.getConnection(function (err,connection) {
-           connection.query($sql.addGoods_flow,[req.body.goods_id,req.loc_id,req.body.car_id,req.body.type,req.body.count,req.body.money,req.newUsername],function (err,result) {
+            var date = new Date();
+            var year = date.getFullYear();
+            var month = date.getMonth()+1;
+            var day = date.getDate();
+
+           connection.query($sql.addGoods_flow,[req.body.goods_id,req.loc_id,req.body.car_id,req.body.type,req.body.count,req.body.money,year,month,day,req.newUsername],function (err,result) {
                var status;
                if(result){
                    status = {"status":"0"}; //增加成功

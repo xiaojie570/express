@@ -9,6 +9,7 @@ var goodsDao = require('../dao/goodsDao');
 var storage_locationDao = require('../dao/storage_locationDao');
 var goods_flowDao = require('../dao/goods_flowDao');
 var flow_typeDao = require('../dao/flow_typeDao');
+var financialDao = require('../dao/financialDao');
 
 //增加货物流动信息
 router.post('/addGoods_flow',function (req,res,next){
@@ -46,8 +47,12 @@ router.post('/addGoods_flow',function (req,res,next){
                                 function selectSurplus_sizeByGoods_id(surplus_size) {
                                     if (req.body.type == "入库") {
                                         req.body.surplus_size = (+surplus_size) - (+req.body.count);
+                                        financialDao.insertDefalut(req,res,next);
+
                                     } else {
                                         req.body.surplus_size = (+surplus_size) + (+req.body.count);
+
+                                        financialDao.insertDefalut(req,res,next);
                                     }
                                     storage_locationDao.updateOnestorageSize(req, res, next);
                                     goods_flowDao.addGoods_flow(req, res, next);

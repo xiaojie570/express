@@ -18,15 +18,16 @@ module.exports = {
             var date = new Date();
             var year = date.getFullYear();
             var month = date.getMonth()+1;
-            var day = date.getDate();
+            var day = date.getDay();
             connection.query($sql.addOneRecord,[req.body.license_plate,req.body.service_details,req.Newemployee_name,req.body.money,year,month,day],function (err,result) {
                 var suc;
                 if(result.affectedRows>0){ //添加成功
+                    console.log("000000000000000000");
                     suc = true;
                 }else{
                     suc = false;
                 }
-                show(self,suc);
+                show(suc);
                 connection.release();
             });
         });
