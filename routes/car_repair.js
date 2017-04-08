@@ -46,5 +46,14 @@ router.post('/deleteOneRecord',function (req,res,next) {
    car_repair.deleteOneRecord(req,res,next,nextMethod);
 });
 
+//按照车牌照查找当年的维修记录
+router.post('/queryByYearandlicense_plate',function (req,res,next) {
+    car_repair.queryByYearandlicense_plate(req,res,next);
+});
 
+
+//按照车牌照查找当月的维修记录
+router.post('/queryByMonthandlicense_plate',function (req,res,next) {
+    car_repair.queryByMonthandlicense_plate(req,res,next);
+});
 module.exports = router;

@@ -12,7 +12,10 @@ var employee = {
     selectByUsername:"select * from employee where username=?",
     modifyPassword:"update user set password=? where username=?",
     selectPasswordByUsername:"select password from user where username=?",
-    queryAll:"select * from employee"
+    queryAll:"select * from employee",
+    addPosition:"insert into employee_position(id,position) values(0,?)",
+    updatePosition:"update employee_position set position=? where id=?",
+    selectIfHavePositionEmployee:"select * from employee where position=?"
 };
 //,telephone=?,location=?,position=?
 module.exports = employee;
