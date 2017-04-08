@@ -6,7 +6,8 @@ var goods_flow = {
     queryInGoods:"select * from goods_flow where type=?",
     queryByUsername:"select * from goods_flow where username=?",
     queryByUsernameAndOut:"select * from goods_flow where username=? and type=?",
-    queryAll:"select * from goods_flow"
+    queryAll:"select * from goods_flow",
+    selectOneMonthSumMoney:"select * from goods_flow where usernmae=? and month=?"
 };
 
 module.exports = goods_flow;

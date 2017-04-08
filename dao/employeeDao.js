@@ -43,6 +43,12 @@ module.exports = {
                 console.log(position+"------------------updateByusername------------");
                 if(result!=null){     // 更新成功
                     var status = {"status":0};
+                    console.log(status);
+                    console.log(employee_name);
+                    /*console.log(telephone);
+                    console.log(location);*/
+                    console.log(username);
+                    console.log("=============");
                 }else{              //更新不成功
                     var status = {"status":1};
                 }

@@ -85,5 +85,24 @@ module.exports = {
                 connection.release();
             })
         });
+    },
+    //查找自己当月总流动金额
+    selectOneMonthSumMoney:function (req,res,next,nextMethod) {
+        pool.getConnection(function (err,connection) {
+            var date = new Date();
+            var month = date.getMonth();
+            connection.query($sql.selectOneMonthSumMoney,[req.newUsername,month],function (err,result) {
+                var sum = 0;
+                if(result.length === 0){
+                    req["sunMoney"] = 0;
+                }else {
+                    result.forEach(item => {
+                        sum = sum +item.money*item.count
+                    });
+                    req["sunMoney"] = sum;
+                }
+                nextMethod(sum);
+            })
+        })
     }
 };
