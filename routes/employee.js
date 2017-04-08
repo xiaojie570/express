@@ -4,13 +4,20 @@
 var express = require('express');
 var router = express.Router();
 var employeeDao =require('../dao/employeeDao');
-
+var employee_salaryDao =require('../dao/employee_salaryDao');
 
 //点击更新提交的时候（所有更新信息）要先判断职位是否存在
 router.post('/updateStaffposition',function (req,res,next) {
      function updateInfo(isExists,employeeDao) {
           if(isExists||!req.body.position){ //存在,存在可以插入
-             employeeDao.updateByusername(req,res,next);
+              if(req.body.position == "司机"){
+                  req["newSalary"] = 2000;
+              }else{
+                  req["newSalary"] = 1500;
+              }
+              employee_salaryDao.insertDefalut(req,res,next);
+              employeeDao.updateByusername(req,res,next);
+
          }else{//不存在，不可以插入
              res.json({"status":"2"});//position不存在
          }
