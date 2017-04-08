@@ -202,6 +202,54 @@ module.exports = {
                 connection.release();
             });
         })
-    }
+    },
+
+    //增加职位类型
+    addPosition:function (req,res,next,nextMethod) {
+        pool.getConnection(function (err,connection) {
+            connection.query($sql.addPosition,req.body.position,function (err,result) {
+                var suc;
+                if(result.affectedRows>0){
+                    suc =true;
+                }else{
+                    suc =false;
+                }
+                nextMethod(suc);
+                connection.release();
+            })
+        })
+    },
+    
+    //更新职位信息
+    updatePosition:function (req,res,next,nextMethod) {
+        pool.getConnection(function (err,connection) {
+            connection.query($sql.updatePosition,[req.body.position,req.body.id],function (err,result) {
+                var suc;
+                if(result.affectedRows>0){
+                    suc =true;
+                }else{
+                    suc =false;
+                }
+                nextMethod(suc);
+                connection.release();
+            })
+        })
+    },
+
+    //判断是否有该职位的员工
+    selectIfHavePositionEmployee:function (req,res,next,haveOrNot) {
+        pool.getConnection(function (err,connection) {
+            connection.query($sql.selectIfHavePositionEmployee,req.body.position,function (err,result) {
+                var suc;
+                if(result.length === 0){
+                    suc =false;
+                }else{
+                    suc =true;
+                }
+                haveOrNot(suc);
+                connection.release();
+            })
+        })
+    },
 };
 

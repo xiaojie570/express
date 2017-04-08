@@ -69,4 +69,37 @@ router.post('/modifyPassword',function (req,res,next) {
 router.post('/queryAll',function (req,res,next) {
     employeeDao.queryAll(req,res,next);
 });
+
+//增加职位类型
+router.post('/addPosition',function (req,res,next) {
+   function nextMethod(suc) {
+       if(suc){
+           employeeDao.selectEmployeePosition(req,res,next);
+       }else{
+           res.json({"status":"1"}); //增加失败
+       }
+   }
+   employeeDao.addPosition(req,res,next,nextMethod);
+});
+
+//更新职位类型
+router.post('/updatePosition',function (req,res,next) {
+    function haveOrNot(isExist) {
+        if (!isExist) {
+            function nextMethod(suc) {
+                if (suc) {
+                    employeeDao.selectEmployeePosition(req, res, next);
+                } else {
+                    res.json({"status": "1"}); //更新失败
+                }
+            }
+
+            employeeDao.updatePosition(req, res, next, nextMethod);
+        }else{
+            res.json({"status": "2"}); //不能更新该职位，有该职位的员工
+        }
+    }
+    employeeDao.selectIfHavePositionEmployee(req,res,next,haveOrNot);
+});
+
 module.exports = router;

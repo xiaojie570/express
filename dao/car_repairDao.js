@@ -71,6 +71,28 @@ module.exports = {
                 connection.release();
             })
         })
+    },
+
+    //按照车牌照查找当年的维修记录
+    queryByYearandlicense_plate:function (req,res,next) {
+        pool.getConnection(function (err,connection) {
+            var date = new Date();
+            var year = date.getFullYear();
+            connection.query($sql.queryByYearandlicense_plate,[year,req.body.license_plate],function (err,result) {
+                res.json(result);
+            })
+        })
+    },
+
+    //按照车牌照查找当年的维修记录
+    queryByMonthandlicense_plate:function (req,res,next) {
+        pool.getConnection(function (err,connection) {
+            var date = new Date();
+            var month = date.getMonth();
+            connection.query($sql.queryByMonthandlicense_plate,[month,req.body.license_plate],function (err,result) {
+                res.json(result);
+            })
+        })
     }
 
 };
