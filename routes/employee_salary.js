@@ -13,6 +13,7 @@ var employee_salaryDao = require('../dao/employee_salaryDao');
 router.post('/showSalary',function (req,res,next) {
     function newMethod(sum) {
         employee_salaryDao.updateSalary(req,res,next);
+        employee_salaryDao.showSalary(req,res,next);
     }
     goods_flowDao.selectOneMonthSumMoney(req,res,next,newMethod);
 });

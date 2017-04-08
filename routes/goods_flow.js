@@ -51,7 +51,7 @@ router.post('/addGoods_flow',function (req,res,next){
                                     }
                                     storage_locationDao.updateOnestorageSize(req, res, next);
                                     goods_flowDao.addGoods_flow(req, res, next);
-                                    goods_flowDao.queryAll(req,res,next);
+                                    //goods_flowDao.queryAll(req,res,next);
 
                                 }
                                 storage_locationDao.querySurplus_sizeByLoc_id(req, res, next, selectSurplus_sizeByGoods_id);

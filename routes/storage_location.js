@@ -17,7 +17,8 @@ router.post('/queryOnestorage_locationbyId',function (req,res,next) {
 router.post('/updateOnestorage_locationbyId',function (req,res,next) {
     function queryAllAfterUpdate(storage_locationDao,suc) {
         if(suc){
-            storage_locationDao.queryAll(req,res,next);
+            res.json({"status":"0"});//更新正确
+            //storage_locationDao.queryAll(req,res,next);
         }else{
             res.json({"status":"1"});//更新失败
         }
@@ -29,7 +30,8 @@ router.post('/updateOnestorage_locationbyId',function (req,res,next) {
 router.post('/addOne',function (req,res,next) {
    function nextMethod(storage_locationDao,suc) {
        if(suc){
-           storage_locationDao.queryAll(req,res,next);
+           res.json({"status":"0"});//更新正确
+           //storage_locationDao.queryAll(req,res,next);
        }else{
            res.json({"status":"1"});//更新失败
        }
