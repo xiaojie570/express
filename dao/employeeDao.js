@@ -39,7 +39,7 @@ module.exports = {
             var location = req.body.location;
             var position = req.body.position;
             var username = req.newUsername;
-            connection.query($sql.updateByusername,[employee_name,telephone,location,position,username],function (err,result) {
+            connection.query($sql.updateByusername,[employee_name,telephone,location,position,req.body.username],function (err,result) {
                 console.log(position+"------------------updateByusername------------");
                 if(result!=null){     // 更新成功
                     var status = {"status":0};
