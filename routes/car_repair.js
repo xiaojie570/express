@@ -42,9 +42,6 @@ router.post('/queryByYear',function (req,res,next) {
 
 //删除一条维修记录
 router.post('/deleteOneRecord',function (req,res,next) {
-   function nextMethod() {
-       car_repair.queryAll(req,res,next);
-   }
    car_repair.deleteOneRecord(req,res,next,nextMethod);
 });
 
