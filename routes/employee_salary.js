@@ -7,13 +7,21 @@ var router = express.Router();
 
 var storage_locationDao = require('../dao/storage_locationDao');
 var goods_flowDao = require('../dao/goods_flowDao');
-var employee_salary = require('../dao/employee_salaryDao');
+var employee_salaryDao = require('../dao/employee_salaryDao');
 
-router.post('/updateSalary',function (req,res,next) {
-    function newMethod(suc) {
-        
+//修改工资
+router.post('/showSalary',function (req,res,next) {
+    function newMethod(sum) {
+        employee_salaryDao.updateSalary(req,res,next);
     }
     goods_flowDao.selectOneMonthSumMoney(req,res,next,newMethod);
-})
+});
+
+//查找自己当月总流动金额
+router.post('/selectOneMonthSumMoney',function (req,res,next) {
+    goods_flowDao.queryByUsername(req,res,next);
+});
+
+
 
 module.exports = router;
