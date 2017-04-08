@@ -42,7 +42,7 @@ router.post('/queryByYear',function (req,res,next) {
 
 //删除一条维修记录
 router.post('/deleteOneRecord',function (req,res,next) {
-   car_repair.deleteOneRecord(req,res,next,nextMethod);
+   car_repair.deleteOneRecord(req,res,next);
 });
 
 //按照车牌照查找当年的维修记录
