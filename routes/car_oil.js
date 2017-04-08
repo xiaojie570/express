@@ -5,6 +5,7 @@ var express = require('express');
 var router = express.Router();
 
 var car_oilDao = require('../dao/car_oilDao');
+var financialDao = require('../dao/financialDao');
 
 //显示出所有加油记录
 router.post('/queryAll',function (req,res,next) {
@@ -20,7 +21,8 @@ router.post('/addOneRecord',function (req,res,next) {
     }else {
         function show(suc) {
             if (suc) {
-                car_oilDao.queryAll(req, res, next);
+                financialDao.insertOilDefalut(req,res,next);
+                res.json({"status":"0"});//增加成功
             }
         }
         car_oilDao.addOneRecord(req, res, next, show);

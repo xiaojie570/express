@@ -6,6 +6,7 @@ var router = express.Router();
 
 var car_repair = require('../dao/car_repairDao');
 var employeeDao = require('../dao/employeeDao');
+var financialDao = require('../dao/financialDao');
 
 //显示所有维修车辆的记录
 router.post('/queryAll',function (req,res,next) {
@@ -17,7 +18,8 @@ router.post('/addOneRecord',function (req,res,next) {
     function nextMethod() {
         function show(suc) {
             if(suc){
-                car_repair.queryAll(req,res,next);
+                financialDao.insertcar_repairDefalut(req,res,next);
+                res.json({"status":"0"}); //增加信息成功
             }else{
                 res.json({"status":"1"}); //增加信息失败
             }

@@ -39,7 +39,7 @@ module.exports = {
                 }else{
                     suc = false;
                 }
-                show(self,suc);
+                show(suc);
                 connection.release();
             })
         })

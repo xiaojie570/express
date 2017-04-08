@@ -204,6 +204,7 @@ module.exports = {
         pool.getConnection(function (err,connection) {
             connection.query($sql.selectByUsername,req.newUsername,function (err,result) {
                 req["Newemployee_name"] = result[0]["employee_name"];
+                console.log(req.Newemployee_name+"111111111111111111");
                 nextMethod();
                 connection.release();
             });
