@@ -23,9 +23,19 @@ module.exports = {
     //修改工资
     updateSalary:function (req,res,next) {
         pool.getConnection(function (err,connection) {
-            connection.query($sql.updateSalary,[req.sunMoney*0.2+1500,req.sunMoney,req.newUsername],function (err,result) {
+            connection.query($sql.updateSalary,[req.sunMoney*0.05+1500,req.sunMoney,req.newUsername],function (err,result) {
                 
             })
         })
+    },
+
+    //显示工资
+    showSalary:function (req,res,next) {
+        pool.getConnection(function (err,connection) {
+            connection.query($sql.showSalary,function (err,result) {
+                res.json(result);
+            })
+        })
     }
+
 };

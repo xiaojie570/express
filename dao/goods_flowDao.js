@@ -15,13 +15,13 @@ module.exports = {
     addGoods_flow:function (req,res,next) {
         pool.getConnection(function (err,connection) {
            connection.query($sql.addGoods_flow,[req.body.goods_id,req.loc_id,req.body.car_id,req.body.type,req.body.count,req.body.money,req.newUsername],function (err,result) {
-               /*var status;
+               var status;
                if(result){
                    status = {"status":"0"}; //增加成功
                }else{
                    status = {"status":"1"}; //增加失败
                }
-               res.json(status);*/
+               res.json(status);
                connection .release();
            });
         });
@@ -50,7 +50,7 @@ module.exports = {
     //按照username来查找进出库
     queryByUsername:function (req,res,next) {
         pool.getConnection(function (err,connection) {
-            connection.query($sql.queryByUsername,req.newUsername,function (err,result) {
+            connection.query($sql.queryByUsername,req.body.username,function (err,result) {
                 res.json(result);
                 connection.release();
             })
@@ -90,10 +90,12 @@ module.exports = {
     selectOneMonthSumMoney:function (req,res,next,nextMethod) {
         pool.getConnection(function (err,connection) {
             var date = new Date();
-            var month = date.getMonth();
-            connection.query($sql.selectOneMonthSumMoney,[req.newUsername,month],function (err,result) {
+            var month = date.getMonth()+1;
+            connection.query($sql.selectOneMonthSumMoney,[req.body.username,month],function (err,result) {
                 var sum = 0;
+                console.log(month);
                 if(result.length === 0){
+                    console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaa");
                     req["sunMoney"] = 0;
                 }else {
                     result.forEach(item => {
@@ -101,6 +103,7 @@ module.exports = {
                     });
                     req["sunMoney"] = sum;
                 }
+                console.log(req.sunMoney+"----------------钱");
                 nextMethod(sum);
             })
         })
