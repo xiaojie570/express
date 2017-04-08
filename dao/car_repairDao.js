@@ -63,11 +63,14 @@ module.exports = {
     },
 
     //删除一条记录
-    deleteOneRecord:function (req,res,next,nextMethod) {
+    deleteOneRecord:function (req,res,next) {
         pool.getConnection(function (err,result) {
             connection.query($sql.deleteOneRecord,req.body.id,function (err,result) {
                 if(result.affectedRows>0){
-                    nextMethod();
+                    res.json({"status":"0"});
+                }else{
+
+                    res.json({"status":"1"});
                 }
                 connection.release();
             })
