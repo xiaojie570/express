@@ -7,7 +7,9 @@ var car = {
     judegEmployee_nameAndlicense_plate:"select * from car where employee_name=? and license_plate=?",
     queryOneCar:"select * from car where id=?",
     updateOneCarInfo:"update car set position=?,employee_name=? where license_plate=?",
-    deleteOneCarId:"delete from car where id=?"
+    deleteOneCarId:"delete from car where id=?",
+    queryLicense_plate:"select license_plate from car",
+    selectLicense_plateByid:"select license_plate from car where id=?"
 
 };
 

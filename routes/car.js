@@ -68,10 +68,9 @@ router.post('/queryOneCar',function (req,res,next) {
 });
 
 //删除一辆汽车
-router.post('/' +
-    '',function (req,res,next) {
+router.post('/deleteOneCarId' ,function (req,res,next) {
     carDao.deleteOneCarId(req,res,next);
-})
+});
 
 //更改一个车辆的信息
 router.post('/updateOneCarInfo',function (req,res,next) {
@@ -103,6 +102,11 @@ router.post('/updateOneCarInfo',function (req,res,next) {
         }
         carDao.judegEmployee_nameAndlicense_plate(req,res,next,judegExist);
     }
+});
+
+//查出所有车辆的车牌照License_plate
+router.post('/queryLicense_plate',function (req,res,next) {
+   carDao.queryLicense_plate(req,res,next);
 });
 
 module.exports = router;
