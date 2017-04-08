@@ -133,6 +133,17 @@ module.exports = {
                 connection .release();
             });
         });
+    },
+
+    //查出车辆的车牌照License_plate
+    queryLicense_plate:function (req,res,result) {
+        pool.getConnection(function (err,connection) {
+            connection.query($sql.queryLicense_plate,function (err,result) {
+                res.json(result);
+                connection.release();
+            });
+        });
     }
+
 
 };

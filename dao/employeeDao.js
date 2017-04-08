@@ -189,9 +189,19 @@ module.exports = {
             connection.query($sql.queryAll,function (err,result) {
                 res.json(result);
                 connection.release();
-            })
+            });
+        });
+    },
+
+    //根据username查询emoployee_name用户名字
+    selecEmployee_nametByUsername:function (req,res,next,nextMethod) {
+        pool.getConnection(function (err,connection) {
+            connection.query($sql.selectByUsername,req.newUsername,function (err,result) {
+                req["Newemployee_name"] = result[0]["employee_name"];
+                nextMethod();
+                connection.release();
+            });
         })
     }
-
 };
 

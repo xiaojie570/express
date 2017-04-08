@@ -11,7 +11,10 @@ var employee = require('./routes/employee');
 var car = require('./routes/car');
 var storage_location = require('./routes/storage_location');
 var goods = require('./routes/goods');
-var goods_flow = require('./routes/goods_flow')
+var goods_flow = require('./routes/goods_flow');
+var car_repair = require('./routes/car_repair');
+var car_oil = require('./routes/car_oil');
+
 //var node_dev = require('node-dev');
 const  jwt = require('jsonwebtoken');
 var app = express();
@@ -137,6 +140,9 @@ app.use('/car', car);
 app.use('/storage_location',storage_location);
 app.use('/goods',goods);
 app.use('/goods_flow',goods_flow);
+app.use('/car_repair',car_repair);
+app.use('/car_oil',car_oil);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found!!!!!!!!!!');

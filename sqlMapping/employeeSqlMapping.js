@@ -13,7 +13,6 @@ var employee = {
     modifyPassword:"update user set password=? where username=?",
     selectPasswordByUsername:"select password from user where username=?",
     queryAll:"select * from employee"
-
 };
 //,telephone=?,location=?,position=?
 module.exports = employee;

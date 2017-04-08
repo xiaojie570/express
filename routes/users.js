@@ -3,6 +3,13 @@ var router = express.Router();
 
 var userDao = require('../dao/userDao');
 var employeeDao = require('../dao/employeeDao');
+
+var date = new Date();
+var year = date.getFullYear();
+var month = date.getMonth()+1;
+var day = date.getDate();
+
+
 const jwt = require('jsonwebtoken');
 /* GET users listing. */
 /*router.get('/', function(req, res, next) {
@@ -140,6 +147,7 @@ router.post('/queryAll', function(req, res, next) {
     let user = Symbol.for('newUser');
     console.log('查询所有user');
     console.log('查询所有user');
+    console.log("year:"+year+"---month:"+month+"-------date:"+day);
     userDao.queryAll(req, res, next);
 });
 
