@@ -3,7 +3,7 @@
  */
 var financial = {
     insertOneRecore:"insert into financial(id,type,money,year,month,day) values(0,?,?,?,?,?)",
-    queryAll:"select * from financial where"
+    queryAll:"select * from financial"
 };
 
 module.exports = financial;
