@@ -10,7 +10,7 @@
 6 silly lifecycle demoApp@0.0.0~prestart: no script for prestart, continuing
 7 info lifecycle demoApp@0.0.0~start: demoApp@0.0.0
 8 verbose lifecycle demoApp@0.0.0~start: unsafe-perm in lifecycle true
-9 verbose lifecycle demoApp@0.0.0~start: PATH: D:\node\node_modules\npm\bin\node-gyp-bin;D:\nodewebpack\demoApp\demoApp\node_modules\.bin;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;D:\node\;D:\git\Git\cmd;C:\Users\fuxia\AppData\Local\Microsoft\WindowsApps;C:\Users\fuxia\AppData\Roaming\npm
+9 verbose lifecycle demoApp@0.0.0~start: PATH: D:\node\node_modules\npm\bin\node-gyp-bin;D:\nodewebpack\demoApp\demoApp\node_modules\.bin;D:\jdk\bin;D:\jdk\jre\bin;D:\node\;C:\Users\fuxia\AppData\Local\Microsoft\WindowsApps;D:\jdk\jre\bin;D:\jdk\bin;C:\Users\fuxia\AppData\Roaming\npm
 10 verbose lifecycle demoApp@0.0.0~start: CWD: D:\nodewebpack\demoApp\demoApp
 11 silly lifecycle demoApp@0.0.0~start: Args: [ '/d /s /c', 'node ./bin/www' ]
 12 verbose stack Error: kill ENOSYS

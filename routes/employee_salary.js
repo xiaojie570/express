@@ -23,6 +23,9 @@ router.post('/selectOneMonthSumMoney',function (req,res,next) {
     goods_flowDao.queryByUsername(req,res,next);
 });
 
-
+//显示所有人的工资
+router.post('/queryAll',function (req,res,next) {
+   employee_salaryDao.queryAll(req,res,next);
+});
 
 module.exports = router;
