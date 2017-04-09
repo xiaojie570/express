@@ -145,7 +145,7 @@ app.use('/goods_flow',goods_flow);
 app.use('/car_repair',car_repair);
 app.use('/car_oil',car_oil);
 app.use('/employee_salary',employee_salary);
-app.ues('/financial',financial);
+app.use('/financial',financial);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
