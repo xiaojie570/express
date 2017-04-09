@@ -24,11 +24,11 @@ module.exports = {
     updateSalary:function (req,res,next) {
         pool.getConnection(function (err,connection) {
             connection.query($sql.updateSalary,[req.sunMoney*0.05+1500,req.sunMoney,req.newUsername],function (err,result) {
-                if(result.affectedRows>0){
+                /*if(result.affectedRows>0){
                     res.json({"status":"0"}) //更新成功
                 }else{
                     res.json({"status":"1"}) //更新失败
-                }
+                }*/
             })
         })
     },
