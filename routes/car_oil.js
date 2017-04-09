@@ -38,7 +38,8 @@ router.post('/queryRecordByLicense_plate',function (req,res,next) {
 router.post('/deleteOneRecordByid',function (req,res,next) {
     function nextMethod(suc) {
         if(suc){
-            car_oilDao.queryAll(req,res,next);
+            res.json({"status:":0});
+            //car_oilDao.queryAll(req,res,next);
         }else{
             res.json({"statua":"1"});//删除失败
         }

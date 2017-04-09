@@ -2354,3 +2354,5 @@
 ::1 - - [09/Apr/2017:06:57:26 +0000] "POST /users/login HTTP/1.1" 200 168 "-" "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.110 Safari/537.36"
 ::1 - - [09/Apr/2017:06:57:34 +0000] "POST /employee_salary/queryAll HTTP/1.1" 200 105 "-" "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.110 Safari/537.36"
 ::1 - - [09/Apr/2017:07:00:50 +0000] "POST /employee_salary/selectOneMonthSumMoney HTTP/1.1" 200 672 "-" "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.110 Safari/537.36"
+::1 - - [09/Apr/2017:08:22:59 +0000] "POST /users/login HTTP/1.1" 200 168 "-" "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.110 Safari/537.36"
+::1 - - [09/Apr/2017:08:23:45 +0000] "POST /car_oil/deleteOneRecordByid HTTP/1.1" 200 604 "-" "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.110 Safari/537.36"
