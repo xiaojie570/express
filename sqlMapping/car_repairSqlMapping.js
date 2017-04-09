@@ -6,7 +6,7 @@ var car_repair = {
     queryAll:"select * from car_repair",
     queryByMonth:"select * from car_repair where month=?",
     queryByYear:"select * from car_repair where year=?",
-    deleteOneRecord:"delete * from car_repair where id=?",
+    deleteOneRecord:"delete  from car_repair where id=?",
     queryByYearandlicense_plate:"select * from car_repair where year=? and license_plate=?",
     queryByMonthandlicense_plate:"select * from car_repair where month=? and license_plate=?"
 };
