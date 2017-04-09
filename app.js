@@ -15,6 +15,7 @@ var goods_flow = require('./routes/goods_flow');
 var car_repair = require('./routes/car_repair');
 var car_oil = require('./routes/car_oil');
 var employee_salary = require('./routes/employee_salary');
+var financial = require('./routes/financial');
 
 //var node_dev = require('node-dev');
 const  jwt = require('jsonwebtoken');
@@ -144,6 +145,7 @@ app.use('/goods_flow',goods_flow);
 app.use('/car_repair',car_repair);
 app.use('/car_oil',car_oil);
 app.use('/employee_salary',employee_salary);
+app.ues('/financial',financial);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

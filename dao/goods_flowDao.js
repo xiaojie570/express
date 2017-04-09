@@ -55,7 +55,7 @@ module.exports = {
     //按照username来查找进出库
     queryByUsername:function (req,res,next) {
         pool.getConnection(function (err,connection) {
-            connection.query($sql.queryByUsername,req.body.username,function (err,result) {
+            connection.query($sql.queryByUsername,req.newUsername,function (err,result) {
                 res.json(result);
                 connection.release();
             })
